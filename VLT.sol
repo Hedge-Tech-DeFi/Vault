@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: UNLICENSED
+
 pragma solidity ^0.6.0;
 
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.3.0/contracts/utils/Address.sol";
@@ -5,6 +7,8 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.3.0/contr
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.3.0/contracts/GSN/Context.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.3.0/contracts/access/Ownable.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.3.0/contracts/token/ERC20/IERC20.sol";
+
+import "./IVLTRecipient.sol";
 
 contract VLT is Context, IERC20, Ownable {
     using SafeMath for uint256;
@@ -16,7 +20,7 @@ contract VLT is Context, IERC20, Ownable {
     string private _name = "Vault";
     string private _symbol = "VLT";
     uint8 private _decimals = 18;
-    uint256 private _totalSupply = 100000;
+    uint256 private _totalSupply = 100000e18;
             
     uint16 public TAX_FRACTION = 10;
     address public taxReceiveAddress;
@@ -86,7 +90,27 @@ contract VLT is Context, IERC20, Ownable {
         _allowances[owner][spender] = amount;
         emit Approval(owner, spender, amount);
     }
+
     function transfer(address recipient, uint256 amount) public override returns (bool) {
+        if(Address.isContract(recipient)) {
+            require(balanceOf(_msgSender()) >= amount, "Doesn't have as many tokens as specified");
+
+            if(nonTaxedAddresses[_msgSender()] == true || TAX_FRACTION == 0){
+                IVLTRecipient receiver = IVLTRecipient(recipient);
+                address payable payableTransferer = payable(_msgSender());
+                
+                receiver.tokenFallback(payableTransferer, amount);
+            } else {
+                uint256 feeAmount = amount.div(TAX_FRACTION);
+                uint256 newAmount = amount.sub(feeAmount);
+                
+                IVLTRecipient receiver = IVLTRecipient(recipient);
+                address payable payableTransferer = payable(_msgSender());
+
+                receiver.tokenFallback(payableTransferer, newAmount);
+            }
+
+        }
         _transfer(_msgSender(), recipient, amount);
         return true;
     }
