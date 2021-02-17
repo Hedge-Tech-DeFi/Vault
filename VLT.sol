@@ -124,10 +124,11 @@ contract VLT is Context, IERC20, Ownable {
   
 
     function _transfer(address sender, address recipient, uint256 amount) internal {
+        require(isVaultContractAddressSet == true, "VLT: Vault Contract address must be set");
         require(sender != address(0), "Mute: transfer from the zero address");
         require(recipient != address(0), "Mute: transfer to the zero address");
 
-        if(nonTaxedAddresses[sender] == true || TAX_FRACTION == 0){
+        if(nonTaxedAddresses[sender] == true || TAX_FRACTION == 0 || recipient == vaultContractAddress){
           _balances[sender] = _balances[sender].sub(amount, "Mute: transfer amount exceeds balance");
           _balances[recipient] = _balances[recipient].add(amount);
 
