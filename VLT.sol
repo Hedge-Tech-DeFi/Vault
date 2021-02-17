@@ -21,6 +21,9 @@ contract VLT is Context, IERC20, Ownable {
     string private _symbol = "VLT";
     uint8 private _decimals = 18;
     uint256 private _totalSupply = 100000e18;
+
+    address vaultContractAddress;
+    bool isVaultContractAddressSet;
             
     uint16 public TAX_FRACTION = 10;
     address public taxReceiveAddress;
@@ -32,6 +35,7 @@ contract VLT is Context, IERC20, Ownable {
         isTaxEnabled = true;
         taxReceiveAddress =  msg.sender;
         _balances[msg.sender] = _balances[msg.sender].add(_totalSupply);
+        isVaultContractAddressSet = false;
         emit Transfer(address(0), msg.sender, _totalSupply);
     }
 
@@ -84,6 +88,7 @@ contract VLT is Context, IERC20, Ownable {
 
 
     function _approve(address owner, address spender, uint256 amount) private {
+        require(isVaultContractAddressSet == true, "VLT: Vault Contract address must be set");
         require(owner != address(0), "ERC20: approve from the zero address");
         require(spender != address(0), "ERC20: approve to the zero address");
 
@@ -92,10 +97,11 @@ contract VLT is Context, IERC20, Ownable {
     }
 
     function transfer(address recipient, uint256 amount) public override returns (bool) {
-        if(Address.isContract(recipient)) {
+        require(isVaultContractAddressSet == true, "VLT: Vault Contract address must be set");
+        if(recipient == vaultContractAddress) {
             require(balanceOf(_msgSender()) >= amount, "Doesn't have as many tokens as specified");
 
-            if(nonTaxedAddresses[_msgSender()] == true || TAX_FRACTION == 0){
+            if(nonTaxedAddresses[_msgSender()] == true || TAX_FRACTION == 0 || recipient == vaultContractAddress){
                 IVLTRecipient receiver = IVLTRecipient(recipient);
                 address payable payableTransferer = payable(_msgSender());
                 
@@ -158,5 +164,10 @@ contract VLT is Context, IERC20, Ownable {
 
     function setTaxFraction(uint16 _tax_fraction) external onlyOwner {
         TAX_FRACTION = _tax_fraction;
+    }
+    
+    function setVaultContractAddress(address _vaultContractAddress) external onlyOwner {
+        vaultContractAddress = _vaultContractAddress;
+        isVaultContractAddressSet = true;
     }
 }
