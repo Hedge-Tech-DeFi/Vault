@@ -25,7 +25,7 @@ contract VLT is Context, IERC20, Ownable {
     address vaultContractAddress;
     bool isVaultContractAddressSet;
             
-    uint16 public TAX_FRACTION = 3;
+    uint16 public TAX_FRACTION = 33;
     address public taxReceiveAddress;
 
     bool public isTaxEnabled;
