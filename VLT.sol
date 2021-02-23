@@ -25,7 +25,7 @@ contract VLT is Context, IERC20, Ownable {
     address vaultContractAddress;
     bool isVaultContractAddressSet;
             
-    uint16 public TAX_FRACTION = 10;
+    uint16 public TAX_FRACTION = 3;
     address public taxReceiveAddress;
 
     bool public isTaxEnabled;
@@ -158,16 +158,9 @@ contract VLT is Context, IERC20, Ownable {
     function setTaxReceiveAddress(address _taxReceiveAddress) external onlyOwner {
         taxReceiveAddress = _taxReceiveAddress;
     }
-
-    function setAddressTax(address _address, bool ignoreTax) external onlyOwner {
-        nonTaxedAddresses[_address] = ignoreTax;
-    }
-
-    function setTaxFraction(uint16 _tax_fraction) external onlyOwner {
-        TAX_FRACTION = _tax_fraction;
-    }
     
     function setVaultContractAddress(address _vaultContractAddress) external onlyOwner {
+        require(isVaultContractAddressSet == false, "Vault Contract Address already set");
         vaultContractAddress = _vaultContractAddress;
         isVaultContractAddressSet = true;
     }
