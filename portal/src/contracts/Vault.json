@@ -1,0 +1,37 @@
+{
+  "contractName": "VLT",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address payable",
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "tokenFallback",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "networks": {
+    "1": {
+      "address": "0x28e041cc0D451980BD2CC4Fa5aD47805a6E4F9F8"
+    },
+    "4": {
+      "address": "0x28e041cc0D451980BD2CC4Fa5aD47805a6E4F9F8"
+    }
+  }
+}

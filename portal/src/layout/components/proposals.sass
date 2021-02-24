@@ -1,0 +1,59 @@
+@import ../config/_colors
+@import ../config/_variables
+
+.proposals
+  display: flex
+  flex-direction: column
+  align-items: center
+  width: 650px
+  max-width: 90vw
+  margin: auto
+  margin-top: -58px
+  min-height: calc(100vh - #{$nav-height + $header-height + $footer-height - 58px})
+
+.proposal
+  width: 100%
+  border: 1px solid $color-very-light-grey
+  border-radius: 3px
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.04)
+  margin-bottom: 16px
+  background: $color-white
+
+.proposal__title
+  font-weight: 500
+  font-size: 20px
+  margin: 0
+  margin: 16px
+
+
+.proposal__bottom
+  display: flex
+  align-items: flex-start
+  justify-content: flex-start
+  border-top: 1px solid $color-very-light-grey
+  padding: 16px
+
+.proposal__arrows
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  margin-right: 12px
+
+.proposal__arrow
+  height: 30px
+  margin: 4px
+  cursor: pointer
+
+.proposal__input
+  border-top-style: hidden
+  border-right-style: hidden
+  border-left-style: hidden
+  border-bottom-style: hidden
+  width: 100%
+  height: xs
+
+
+.proposal__state
+  left: 85%
+  position: relative;

@@ -1,0 +1,46 @@
+@import ../config/_colors
+@import ../config/_variables
+@import ../config/_breakpoints
+  
+.nav
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 0 16px
+  height: $nav-height
+  background: $color-black
+
+.nav__brand
+  text-decoration: none
+  cursor: pointer
+  display: flex
+  align-items: center
+
+.nav__brand-logo
+  width: 20px
+
+.nav__brand-name
+  margin-left: 8px
+  font-size: 20px
+  color: $color-white
+  font-weight: 500
+
+  +media($breakpoint-sm)
+    display: none
+
+.nav__account
+  color: $color-white
+  background: $color-dark-grey
+  border-radius: 3px
+  font-size: 14px
+  padding: 8px 16px
+  cursor: pointer
+
+.nav__wrapper
+  background: $color-black
+
+.nav__network
+  margin: 0
+  padding: 16px 0
+  text-align: center
+  color: $color-white
