@@ -194,7 +194,7 @@ class App extends Component {
   getNetworkName = () => {
     const {networkId} = this.state;
 
-    if(networkId === 1) {
+    if(networkId === 56) {
       this.setState({network: 'Mainnet'});
     } else if(networkId === 3) {
       this.setState({network: 'Ropsten'});
@@ -241,7 +241,7 @@ class App extends Component {
   getTokenBalance = () => {
     if(this.state.network === 'Mainnet') {
       this.xhr(
-        `https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x4F350D2d8C04a165bc8bEE68D16493B06866a5D1&apiKey=2SDT7WUWQDZ8EJZWHP6QUPEZAX8ZE7VPV2&address=${this.state.account}`, 
+        `https://api.bscscan.io/api?module=account&action=tokenbalance&contractaddress=0x82DA15e36F23A4b603Bc8A57c27813F2fAEb04B2&apiKey=98ASKDERTVMWB73GRI3E7QPFA8EHUQZ9JS&address=${this.state.account}`, 
       (res) => {
         const data = JSON.parse(res);
         const balance = data.result / 10**18;
@@ -261,7 +261,7 @@ class App extends Component {
       });
     } else {
       this.xhr(
-        `https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x4F350D2d8C04a165bc8bEE68D16493B06866a5D1&apiKey=2SDT7WUWQDZ8EJZWHP6QUPEZAX8ZE7VPV2&address=${this.state.account}`, 
+        `https://api.bscscan.io/api?module=account&action=tokenbalance&contractaddress=0x82DA15e36F23A4b603Bc8A57c27813F2fAEb04B2&apiKey=98ASKDERTVMWB73GRI3E7QPFA8EHUQZ9JS&address=${this.state.account}`, 
       (res) => {
         const data = JSON.parse(res);
         const balance = data.result / 10**18;

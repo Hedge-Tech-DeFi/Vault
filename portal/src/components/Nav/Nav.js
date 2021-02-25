@@ -32,7 +32,7 @@ class Nav extends Component {
             <a className="nav__brand" href="/">
               <img src={logo} alt="Compound" className="nav__brand-logo" />
               <h1 className="nav__brand-name">
-                HedgeTech Governance
+                HedgeTech Vault
               </h1>
             </a>
             {button}

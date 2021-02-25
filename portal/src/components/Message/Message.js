@@ -16,7 +16,7 @@ class Message extends Component {
           className="message"
           target="_blank"
           rel="noopener noreferrer"
-          href={this.props.txHash ? `http://${network}etherscan.io/tx/${this.props.txHash}` : null}
+          href={this.props.txHash ? `http://${network}bscscan.io/tx/${this.props.txHash}` : null}
         >
           {this.props.message}
         </a>

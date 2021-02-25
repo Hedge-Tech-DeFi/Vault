@@ -414,8 +414,8 @@
     }
   ],
   "networks": {
-    "1": {
-      "address": "0x4F350D2d8C04a165bc8bEE68D16493B06866a5D1"
+    "56": {
+      "address": "0x82DA15e36F23A4b603Bc8A57c27813F2fAEb04B2"
     },
     "4": {
       "address": "0x4F350D2d8C04a165bc8bEE68D16493B06866a5D1"

@@ -27,8 +27,8 @@
     }
   ],
   "networks": {
-    "1": {
-      "address": "0x28e041cc0D451980BD2CC4Fa5aD47805a6E4F9F8"
+    "56": {
+      "address": "0x9dF2D0890528e8ff1195a91c12c476291BFAd8Cb"
     },
     "4": {
       "address": "0x28e041cc0D451980BD2CC4Fa5aD47805a6E4F9F8"

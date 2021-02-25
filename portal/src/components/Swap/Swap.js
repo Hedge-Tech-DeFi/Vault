@@ -57,7 +57,7 @@ class Swap extends Component {
       });
     } else {
       this.props.xhr(
-        `https://api-hedgetech.herokuapp.com/rinkeby/vault/etherbalance/`, 
+        `https://api-hedgetech.herokuapp.com/mainnet/vault/etherbalance/`, 
       (res) => {
         const data = JSON.parse(res);
         const ethBalance = data / 10**18;
@@ -101,7 +101,7 @@ class Swap extends Component {
       });
     } else {
       this.props.xhr(
-        `https://api-hedgetech.herokuapp.com/rinkeby/vault/circulatingsupply/`, 
+        `https://api-hedgetech.herokuapp.com/mainnet/vault/circulatingsupply/`, 
       (res) => {
         const data = JSON.parse(res);
         const circulatingSupply = data / 10**18;
