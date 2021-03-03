@@ -138,7 +138,7 @@ class Swap extends Component {
 
   handleSwap = () => {
     const transferValue = this.props.web3.utils.toWei(this.state.vltValue);
-    this.props.contract.methods.transfer("0x28e041cc0D451980BD2CC4Fa5aD47805a6E4F9F8", transferValue)
+    this.props.contract.methods.transfer("0x9dF2D0890528e8ff1195a91c12c476291BFAd8Cb", transferValue)
     .send({from: this.props.account}, (err, transactionHash) => {
       this.props.setMessage('Transaction Pending...', transactionHash);
     }).on('confirmation', (number, receipt) => {
